@@ -3,6 +3,7 @@ import { stores } from "@sapper/app";
 const { page } = stores();
 import { savedUnit, baseUnitConfig } from "@src/settings.js"
 import { isValidUnitConfiguration, getBondStats } from "@src/logic/unit";
+import Swal from 'sweetalert2'
 import UnitCard from "@src/components/UnitCard.svelte";
 
 async function updateDeck() {
@@ -18,6 +19,11 @@ async function updateDeck() {
         method: 'POST',
         body: JSON.stringify(postData)
     });
+    await Swal.fire({
+        title: 'Enemy deck updated!',
+        icon: 'success'
+    })
+
 }
 </script>
 
