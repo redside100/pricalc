@@ -269,7 +269,7 @@ function getEquipmentStats(equipmentSet, config) {
 	return stats;
 }
 
-function getBondStats(config) {
+export function getBondStats(config) {
 	let stats = {};
 	for (var baseUnitIdString in config.bond) {
 		let baseUnitId = baseUnitIdString * 1;

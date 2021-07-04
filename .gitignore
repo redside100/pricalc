@@ -7,3 +7,4 @@ master.db
 yarn-error.log
 /__sapper__/
 src/data/tables/*.json
+.idea

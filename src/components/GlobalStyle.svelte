@@ -106,6 +106,10 @@
 		border-radius: 5px 5px 4px 4px;
 	}
 
+    div.green {
+        background-color: #32cd32;
+    }
+
 	th {
 		text-align: left;
 	}

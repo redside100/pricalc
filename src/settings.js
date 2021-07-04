@@ -51,7 +51,7 @@ export const baseUnitConfig = {
 	},
 	bond: {}
 };
-export const savedUnit = localStorageStore("savedUnit", baseUnitConfig);
+export const savedUnit = localStorageStore("savedUnit", [baseUnitConfig, baseUnitConfig, baseUnitConfig, baseUnitConfig, baseUnitConfig]);
 
 export const savedSimTeam = localStorageStore("savedSimTeam", {
 	offense: {

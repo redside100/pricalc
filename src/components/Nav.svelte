@@ -34,17 +34,17 @@
 
 <nav>
 	<div id="nav-wrap">
-		<div id="menu" class="icon-menu" class:toggled={$showMenu} on:click={toggleMenu}></div>
-		<a href="."><h1>PriCalc</h1></a>
+<!--		<div id="menu" class="icon-menu" class:toggled={$showMenu} on:click={toggleMenu}></div>-->
+		<a href="."><h1>Prid</h1></a>
 		<ul>
 			{#each nav as navData}
 			<a href={navData.path}><li aria-selected="{segment === navData.path.split('/')[0] ? "true" : undefined}">{navData.displayName}</li></a>
 			{/each}
 		</ul>
-		<div class="nav-right">
-			<a href="about"><span id="version">Version {version}</span></a>
-			<div id="settings" class="icon-cog" on:click={showSettings} ></div>
-		</div>
+<!--		<div class="nav-right">-->
+<!--			<a href="about"><span id="version">Version {version}</span></a>-->
+<!--			<div id="settings" class="icon-cog" on:click={showSettings} ></div>-->
+<!--		</div>-->
 	</div>
 </nav>
 

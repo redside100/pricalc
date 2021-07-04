@@ -14,7 +14,7 @@
 	import { STAT_NAMES, STAT_DISPLAY_NAMES, WEAPON_TYPES, lookupRows, getTable, isTableLoaded } from "@src/data";
 	import { createActor, getUnitType, getUnitIdBase, isValidUnitConfiguration, getBlankEquipmentSet,
 		getMaxRank, getMaxLevel, getPositionClass, getShardType, getCharaCards } from "@src/logic";
-	import { hideImpossibleRarities, includeExSkillStats, dataSource } from "@src/settings.js";
+	import { hideImpossibleRarities, includeExSkillStats, dataSource, baseUnitConfig } from "@src/settings.js";
 	import { sortByAttr } from "@src/utils"
 
 	const requiredTables = [ "unit_data", "experience_team", "chara_story_status", "unit_promotion",
@@ -207,6 +207,46 @@
 		for (var key in unit.bond) {
 			unit.bond[key] = 8;
 		}
+	}
+
+	function resetUnit() {
+		unit.id = -1
+		unit.rarity = 1
+		unit.level = 1
+		unit.rank = 1
+		unit.equipment = {
+			slot1: {
+				equipped: false,
+				refine: 0
+			},
+			slot2: {
+				equipped: false,
+				refine: 0
+			},
+			slot3: {
+				equipped: false,
+				refine: 0
+			},
+			slot4: {
+				equipped: false,
+				refine: 0
+			},
+			slot5: {
+				equipped: false,
+				refine: 0
+			},
+			slot6: {
+				equipped: false,
+				refine: 0
+			}
+		}
+		unit.skills = {
+			union_burst: 1,
+			main_skill_1: 1,
+			main_skill_2: 1,
+			ex_skill_1: 1
+		}
+		unit.bond = {}
 	}
 
 	function minAll() {
@@ -428,6 +468,9 @@
 						<td class="bond-cell">
 							<UnitCard_Bond unitId={unit.id} bind:bond={unit.bond} />
 						</td>
+						<td>
+							<div class="button card-control-button-delete" on:click={resetUnit}>Remove</div>
+						</td>
 					</tr></table>
 					{/if}
 					{#if unitType === "summon"}
@@ -548,6 +591,11 @@ div.card-control {
 
 div.card-control-button {
 	padding: 5px;
+}
+
+div.card-control-button-delete {
+	padding: 5px;
+	background-color: #cd5c5c;
 }
 
 div.card-control-button + div.card-control-button {
