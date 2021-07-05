@@ -15,7 +15,7 @@ async function updateDeck() {
     //     method: 'POST',
     //     body: JSON.stringify(postData)
     // })
-    await fetch('http://localhost:3333/update', {
+    await fetch('http://localhost:3333/update/arena', {
         method: 'POST',
         body: JSON.stringify(postData)
     });
@@ -30,5 +30,5 @@ async function updateDeck() {
 <div class="button green" on:click={updateDeck}>Update Prid Enemy Deck</div>
 <br>
 {#each Array(5) as _, i}
-    <UnitCard bind:unit={$savedUnit[i]}/>
+    <UnitCard bind:unit={$savedUnit[i]} enemyOnly={false}/>
 {/each}

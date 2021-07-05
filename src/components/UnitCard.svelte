@@ -1,6 +1,7 @@
 <script>
 	// This code is a mess
 	export let unit;
+	export let enemyOnly;
 
 	import UnitCard_EquipSet from "@src/components/UnitCard_EquipSet.svelte";
 	import UnitCard_Skills from "@src/components/UnitCard_Skills.svelte";
@@ -30,6 +31,7 @@
 		equipment: {}
 	}
 	let dataLoaded = false;
+	let lastHp = -1;
 	let charaCards = {};
 
 	let options = {};
@@ -247,6 +249,8 @@
 			ex_skill_1: 1
 		}
 		unit.bond = {}
+		unit.currentHp = -1
+		unit.currentTp = 0
 	}
 
 	function minAll() {
@@ -351,7 +355,9 @@
 				main_skill_2: 1,
 				ex_skill_1: 1
 			},
-			bond: {}
+			bond: {},
+			currentHp: -1,
+			currentTp: 0
 		}
 		resetEquipment()
 	}
@@ -360,6 +366,7 @@
 	$: actor = recalculate(unit, validConfig, options, dataLoaded);
 	$: unitComments = getUnitComments(actor);
 	$: unitName = getName(actor);
+	$: setUnitStats(actor)
 
 	function getBondIds(unitId) {
 		if (!dataLoaded) return false;
@@ -400,6 +407,17 @@
 		}
 		else {
 			return "Select a character...";
+		}
+	}
+
+	function setUnitStats(actor) {
+		if (actor && actor.hp === lastHp) {
+			return
+		}
+		if (actor && actor.hp) {
+			unit.currentHp = actor.hp
+			unit.currentTp = 0
+			lastHp = actor.hp
 		}
 	}
 
@@ -453,7 +471,7 @@
 	<div>
 		<div class="unit-card-header">
 			<div class="unit-card-inputs">
-				<UnitInput bind:unitId={unit.id} rarity={unit.rarity} prefabId={getPrefabId(actor)} />
+				<UnitInput bind:unitId={unit.id} rarity={unit.rarity} prefabId={getPrefabId(actor)} enemyOnly={enemyOnly}/>
 				<div class="unit-card-parameters">
 					<div><strong>{unitName}</strong></div>
 					{#if unitType === "character"}
@@ -501,6 +519,18 @@
 				</div>
 				{/if}
 				<div class="unit-card-general">
+					{#if actor && unitType !== "???" && enemyOnly}
+						<div style="padding-bottom: 10px">
+							<strong>HP</strong>
+								<div style="padding-left: 4px">
+									<input type=number bind:value={unit.currentHp} min=1 max={actor['hp']}><input type=range bind:value={unit.currentHp} min={1} max={actor['hp']}>
+								</div>
+							<strong>TP</strong>
+								<div style="padding-left: 4px">
+									<input type=number bind:value={unit.currentTp} min=0 max=1000><input type=range bind:value={unit.currentTp} min=0 max={1000}>
+								</div>
+						</div>
+					{/if}
 					<div class="unit-card-miscstats">
 						{#if actor && actor.unitData}
 							{#if unitType === "character"}

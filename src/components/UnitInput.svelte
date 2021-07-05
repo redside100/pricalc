@@ -6,6 +6,7 @@ import { showModal, closeModal } from "@src/components/Modal.svelte";
 export let unitId;
 export let prefabId = null;
 export let rarity;
+export let enemyOnly = false;
 
 $: charImg = getUnitImg(unitId, { rarity: rarity, useMissingImage: false, usePrefabId: true });
 
@@ -15,9 +16,10 @@ function selectUnit(id) {
 }
 
 function showUnitSelect() {
-	showModal(UnitSelect, { 
-		props: { 
+	showModal(UnitSelect, {
+		props: {
 			unitId: unitId,
+			enemyOnly: enemyOnly,
 			selectCallback: selectUnit
 		}
 	});

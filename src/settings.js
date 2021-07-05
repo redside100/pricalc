@@ -49,10 +49,12 @@ export const baseUnitConfig = {
 		main_skill_2: 1,
 		ex_skill_1: 1
 	},
-	bond: {}
+	bond: {},
+	currentHp: -1,
+	currentTp: 0
 };
 export const savedUnit = localStorageStore("savedUnit", [baseUnitConfig, baseUnitConfig, baseUnitConfig, baseUnitConfig, baseUnitConfig]);
-
+export const savedDungeonUnit = localStorageStore("savedDungeonUnit", baseUnitConfig);
 export const savedSimTeam = localStorageStore("savedSimTeam", {
 	offense: {
 		unit1: baseUnitConfig,

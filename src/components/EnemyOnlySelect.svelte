@@ -6,7 +6,6 @@ import { sortByAttr } from "@src/utils"
 
 export let unitId = -1;
 export let selectCallback;
-export let enemyOnly;
 
 let UNLOCKED_UNITS = getUnlockedUnits();
 let SUMMON_UNITS = getSummonUnits();
@@ -61,7 +60,7 @@ function getInitialSelectTab(unitId) {
 	let unitType = getUnitType(unitId);
 	if (unitType === "boss") return "bosses";
 	else if (unitType === "enemy" || unitType === "shadow") return "enemies";
-	else return enemyOnly ? "bosses" : "characters";
+	else return "bosses";
 }
 
 $: selectRows = getUnitSelectionRows(selectTab);
@@ -96,9 +95,7 @@ function createSelectHandler(id) {
 	<h2>Select a unit</h2>
 	<div class="unit-tabs-wrap">
 		<table class="unit-tabs"><tr>
-			{#if !enemyOnly}
-			<td><div class="tab" class:selected={selectTab === "characters"} on:click={switchTab("characters")}>Characters</div></td>
-			{/if}
+<!--			<td><div class="tab" class:selected={selectTab === "characters"} on:click={switchTab("characters")}>Characters</div></td>-->
 			<td><div class="tab" class:selected={selectTab === "enemies"} on:click={switchTab("enemies")}>Enemies</div></td>
 			<td><div class="tab" class:selected={selectTab === "bosses"} on:click={switchTab("bosses")}>Bosses</div></td>
 		</tr></table>

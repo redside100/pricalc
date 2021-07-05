@@ -5,7 +5,11 @@ export const version = "0.5";
 export const nav = [
 	{
 		path: "units",
-		displayName: "Enemy Units"
+		displayName: "Enemy Arena Units"
+	},
+	{
+		path: "dungeon",
+		displayName: "Enemy Dungeon Unit"
 	},
 	// {
 	// 	path: "simulator",
@@ -122,13 +126,20 @@ export const pages = [
 	// 	description: "Calculate how many divine amulets you'll need to get a character starred up.",
 	// 	icon: "jp/icon/extract/latest/icon_item_90005.png"
 	// },
-	  {
+	{
 		path: "units",
 		category: "Tools",
 		displayName: "Prid Enemy Units",
 		description: "Setup opposing arena units for Prid.",
 		icon: "jp/unit/extract/latest/icon_unit_101211.png"
-	  },
+	},
+	{
+		path: "dungeon",
+		category: "Tools",
+		displayName: "Prid Dungeon Enemy",
+		description: "Setup the dungeon enemy for Prid.",
+		icon: "jp/unit/extract/latest/icon_unit_302100.png"
+	},
 	// {
 	// // 	path: "simulator",
 	// // 	category: "Featured PriCalc Tools",
