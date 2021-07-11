@@ -4,6 +4,10 @@ export const version = "0.5";
 
 export const nav = [
 	{
+		path: "self-units",
+		displayName: "Own Arena Units"
+	},
+	{
 		path: "units",
 		displayName: "Enemy Arena Units"
 	},
@@ -127,11 +131,18 @@ export const pages = [
 	// 	icon: "jp/icon/extract/latest/icon_item_90005.png"
 	// },
 	{
+		path: "self-units",
+		category: "Tools",
+		displayName: "Prid Own Units",
+		description: "Setup your own arena units for Prid.",
+		icon: "jp/unit/extract/latest/icon_unit_101211.png"
+	},
+	{
 		path: "units",
 		category: "Tools",
 		displayName: "Prid Enemy Units",
 		description: "Setup opposing arena units for Prid.",
-		icon: "jp/unit/extract/latest/icon_unit_101211.png"
+		icon: "jp/unit/extract/latest/icon_shadow_102811.png"
 	},
 	{
 		path: "dungeon",
@@ -189,7 +200,7 @@ export const pages = [
 	// 	description: "Dates on which characters got their unique equipment.",
 	// 	icon: "jp/icon/extract/latest/icon_equipment_140000.png"
 	// }
-].sort(sortByAttr("displayName"));
+];
 
 export const changeLog = [{
 		version: "0.5",

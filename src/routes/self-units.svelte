@@ -1,13 +1,13 @@
 <script>
 import { stores } from "@sapper/app";
 const { page } = stores();
-import { savedUnit, baseUnitConfig } from "@src/settings.js"
+import { savedSelfUnit, baseUnitConfig } from "@src/settings.js"
 import { isValidUnitConfiguration, getBondStats } from "@src/logic/unit";
 import Swal from 'sweetalert2'
 import UnitCard from "@src/components/UnitCard.svelte";
 
 async function updateDeck() {
-    let postData = JSON.parse(JSON.stringify($savedUnit));
+    let postData = JSON.parse(JSON.stringify($savedSelfUnit));
     for (let unitConfig of postData) {
         unitConfig['prid_bond_stats'] = getBondStats(unitConfig)
     }
@@ -15,22 +15,22 @@ async function updateDeck() {
     //     method: 'POST',
     //     body: JSON.stringify(postData)
     // })
-    await fetch('http://localhost:3333/update/arena', {
+    await fetch('http://localhost:3333/update/self', {
         method: 'POST',
         body: JSON.stringify(postData)
     });
     await Swal.fire({
-        title: 'Enemy deck updated!',
+        title: 'Self arena deck updated!',
         icon: 'success'
     })
 
 }
 </script>
 
-<div class="button green" on:click={updateDeck}>Update Prid Enemy Deck</div>
+<div class="button green" on:click={updateDeck}>Update Prid Self Deck</div>
 <br>
 {#each Array(5) as _, i}
-    <UnitCard bind:unit={$savedUnit[i]} enemyOnly={false}/>
+    <UnitCard bind:unit={$savedSelfUnit[i]} enemyOnly={false}/>
     {#if i !== 4}
         <hr>
     {/if}

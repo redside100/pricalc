@@ -54,6 +54,7 @@ export const baseUnitConfig = {
 	currentTp: 0
 };
 export const savedUnit = localStorageStore("savedUnit", [baseUnitConfig, baseUnitConfig, baseUnitConfig, baseUnitConfig, baseUnitConfig]);
+export const savedSelfUnit = localStorageStore("savedSelfUnit", [baseUnitConfig, baseUnitConfig, baseUnitConfig, baseUnitConfig, baseUnitConfig]);
 export const savedDungeonUnit = localStorageStore("savedDungeonUnit", baseUnitConfig);
 export const savedSimTeam = localStorageStore("savedSimTeam", {
 	offense: {

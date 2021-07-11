@@ -25,6 +25,7 @@
 		"training_quest_data", "resist_data", "ailment_data", "fix_lineup_group_set", "quest_reward_data",
 		"experience_unit", "skill_cost", "{clanBattleBossData}" ]
 
+	let showExtra = false;
 	let MAX_LEVEL = 1;
 	let MAX_RANK = {
 		rank: 1,
@@ -469,7 +470,7 @@
 <DataComponent requiredTables={requiredTables} onDataReady={onDataReady} >
 	{#if dataLoaded}
 	<div>
-		<div class="unit-card-header">
+		<div class="unit-card-header" style="padding-top: 5px">
 			<div class="unit-card-inputs">
 				<UnitInput bind:unitId={unit.id} rarity={unit.rarity} prefabId={getPrefabId(actor)} enemyOnly={enemyOnly}/>
 				<div class="unit-card-parameters">
@@ -574,21 +575,30 @@
 			{/if}
 		</div>
 		{#if actor && unitType !== "???"}
-		<div class="card-section-wrap">
-			<UnitCard_Stats actor={actor} />
-			{#if unitType === "character"}
-			<UnitCard_EquipSet unitId={unit.id} rank={unit.rank} bind:equipment={unit.equipment} />
+			<a on:click={() => showExtra = !showExtra} style="user-select: none">
+				{#if !showExtra}
+					More Info
+				{:else}
+					Less Info
+				{/if}
+			</a>
+			{#if showExtra}
+				<div class="card-section-wrap">
+					<UnitCard_Stats actor={actor} />
+					{#if unitType === "character"}
+						<UnitCard_EquipSet unitId={unit.id} rank={unit.rank} bind:equipment={unit.equipment} />
+					{/if}
+					{#if unitType === "boss" || unitType === "enemy"}
+						<UnitCard_Resistances resistanceData={actor.resist} />
+					{/if}
+					{#if false && (unitType === "enemy" || unitType === "shadow")}
+						<UnitCard_Drops enemyId={unit.enemyId} />
+					{/if}
+					{#if unitType === "character" || unitType === "boss" || unitType === "shadow" || unitType === "enemy" || unitType === "summon"}
+						<UnitCard_Skills unitId={unit.id} rank={unit.rank} level={unit.level} rarity={unit.rarity} actor={actor} bind:skillLevels={unit.skills} />
+					{/if}
+				</div>
 			{/if}
-			{#if unitType === "boss" || unitType === "enemy"}
-			<UnitCard_Resistances resistanceData={actor.resist} />
-			{/if}
-			{#if false && (unitType === "enemy" || unitType === "shadow")}
-			<UnitCard_Drops enemyId={unit.enemyId} />
-			{/if}
-			{#if unitType === "character" || unitType === "boss" || unitType === "shadow" || unitType === "enemy" || unitType === "summon"}
-			<UnitCard_Skills unitId={unit.id} rank={unit.rank} level={unit.level} rarity={unit.rarity} actor={actor} bind:skillLevels={unit.skills} />
-			{/if}
-		</div>
 		{/if}
 	</div>
 	{/if}
